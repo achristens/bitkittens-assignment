@@ -9,20 +9,16 @@ document.addEventListener("DOMContentLoaded", function(){
       dataType: 'JSON'
     }).done(function(responseData){
       var array = responseData.cats
-      array.forEach(function(kitty){
-        // Creates a new <img> tag
-        var newImg = document.createElement('img');
-        // Sets the src attribute of the <img> to the cat's photo
-        newImg.src  = kitty['photo']
-        // Sets the alt attribute of the <img> to "Photo of (insert cat name here)"
-        newImg.alt = "Photo of " + kitty.name
-        // Inserts that <img> into one of the empty .cat-box divs
-        catBox.forEach(function(box){
-          if (box.innerHTML === ""){
+        catBox.forEach(function(box, index){
+          var newImg = document.createElement('img');
+          // Sets the src attribute of the <img> to the cat's photo
+          newImg.src  = array[index]['photo']
+          // Sets the alt attribute of the <img> to "Photo of (insert cat name here)"
+          newImg.alt = "Photo of " + array[index].name
+          // Inserts that <img> into one of the empty .cat-box divs
+          box.innerHTML = ""
             box.append(newImg)
-          }
-        })
-      })
-    })
+        });
+    });
   });
 });
